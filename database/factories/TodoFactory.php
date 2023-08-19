@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
 use App\Models\Todo;
 
 /**
@@ -20,11 +19,15 @@ class TodoFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'title' => fake()->words(3),
             'description' => fake()->sentences(4),
-            'status' => $this->faker->randomElement(['pending', 'done','cancelled','delayed','doing']),
-            'user_id' => User::factory()->create()->id
+            'status' => fake()->randomElement(['pending', 'done','cancelled','delayed','doing']),
+            'user_id' => rand(1,100)
         ];
     }
+
+
+
 }

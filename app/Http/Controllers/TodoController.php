@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\TryCatch;
 
 class TodoController extends Controller
 {
@@ -11,15 +14,25 @@ class TodoController extends Controller
      */
     public function index()
     {
-        
+        $todos = Todo::all();
+        return response([
+            'todos' => $todos
+        ],200);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        try {
+            $user = Auth::user();
+            if($user){
+                $user->create
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**

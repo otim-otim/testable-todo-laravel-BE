@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title',25);
             $table->string('description',1000);
-            $table->enum('status',['pending','doing','done','delayed','cancelled']);
+            $table->string('status'); //,['pending','doing','done','delayed','cancelled']
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
         });
