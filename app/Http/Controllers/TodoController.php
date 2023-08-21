@@ -26,12 +26,27 @@ class TodoController extends Controller
     public function create(Request $request)
     {
         try {
+            $validated = $request->validate([
+                'title' => 'required|alpha_num',
+                'description' => 'required|alpha_num'
+
+                ]);
             $user = Auth::user();
             if($user){
-                $user->create
+               $todo = $user->create([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'status' => 'Pending'
+                ]);
+                return $this->customSuccessResponse([
+                    'todo'=>$todo,
+                    'message'=> 'Todo added successfully'
+                    ],200);
             }
+            return $this->customFailureResponse('Unauthorized', 401);
         } catch (\Throwable $th) {
             //throw $th;
+            return $this->customFailureResponse('Internal Server Error', 500);
         }
     }
 

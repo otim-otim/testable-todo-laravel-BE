@@ -25,8 +25,7 @@ class TodoTest extends TestCase
         $todo = Todo::factory()
             ->create($todo_data);
         $response = $this->get('api/todos');
-
         $response->assertStatus(200);
-        $response->assert
+        // $response->assert
     }
 }
