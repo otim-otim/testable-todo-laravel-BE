@@ -14,7 +14,7 @@ class UserTest extends TestCase
     public function test_creates_a_user(): void
     {
         $response = $this->post('api/register',[
-            'name' => 'lintonmarley',
+            'name' => 'linton marley',
             'email' => 'lintonmarley@gmail.com',
             'password' => 'password',
             'confirm_password' => 'password'
