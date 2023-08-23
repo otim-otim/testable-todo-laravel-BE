@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use App\Services\UserService;
 
 class AuthController extends Controller
 {
+    public function __construct(public $userService = new UserService()){
+
+    }
+
     public function loginUser(Request $request){
         try {
             //code...
@@ -47,7 +52,7 @@ class AuthController extends Controller
                 'confirm_password' => 'required|same:password'
             ]);
 
-            if($this->findIfUserExists($request->email)){
+            if($this->userService->findIfUserExists($request->email)){
                 return $this->customFailureResponse('Email already exists', 401);
             }
             $user = $this->storeUser($request->name, $request->email, $request->password);
@@ -59,11 +64,7 @@ class AuthController extends Controller
 
     }
 
-    public function findIfUserExists($email){
-        $user = User::where('email', $email)->first();
-        if($user) return true;
-        else return false;
-    }
+
 
     public function storeUser($name, $email, $password){
         try {
