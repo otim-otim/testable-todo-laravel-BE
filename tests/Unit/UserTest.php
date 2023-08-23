@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use App\Models\User;
 
 class UserTest extends TestCase
 {
@@ -12,6 +13,7 @@ class UserTest extends TestCase
 
 
      public function test_if_user_exists(){
-        
+        $user = User::factory(User::class)->create(1);
+
      }
 }
