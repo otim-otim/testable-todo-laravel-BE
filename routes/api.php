@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/todos',[TodoController::class,'index']);
+    Route::post('/todos-create',[TodoController::class,'store']);
 });
 
-Route::get('/todos',[TodoController::class,'index']);
 
 Route::post('/register',[AuthController::class, 'signup']);
+Route::post('/login',[AuthController::class, 'loginUser']);
+
